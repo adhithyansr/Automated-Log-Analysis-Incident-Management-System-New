@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "alert_id": 1,
+    "type": "email",
+    "config": {
+      "to": [
+        "createcontent123@gmail.com"
+      ],
+      "subject": "UXDEMO-Application Error Alert",
+      "body": "Hello Team,\r\n\r\nThis is an automated alert triggered by the application logs.\r\n\r\n**Error Details:**\r\n\r\n* **Component:** DatabaseConnection\r\n* **Error Message:** Failed to connect to database after 3 retries\r\n* **Timeout:** 5000 ms\r\n* **Severity:** High\r\n* **Impact:** Application may be unable to process requests that require database access.\r\n\r\n**Log Snippet:**\r\n\r\n```\r\nERROR DatabaseConnection - Failed to connect to database after 3 retries (timeout=5000ms)\r\n```\r\n\r\n**Possible Causes:**\r\n\r\n* Database server is down or unreachable\r\n* Network latency or connectivity issues\r\n* Database connection pool exhaustion\r\n* Incorrect database configuration or credentials\r\n\r\n**Recommended Actions:**\r\n\r\n1. Verify database server availability.\r\n2. Check network connectivity between application and database.\r\n3. Review database connection pool and timeout settings.\r\n4. Inspect recent configuration or deployment changes.\r\n\r\nPlease investigate this issue at the earliest to prevent further service impact.\r\n\r\nRegards,\r\nProduction Support Team\r\n",
+      "importance": "high",
+      "include_log": false
+    }
+  },
+  {
+    "id": 2,
+    "alert_id": 1,
+    "type": "servicenow",
+    "config": {
+      "priority": "1",
+      "short_description": "Database connection failure after 3 retries due to timeout (5000ms)",
+      "description": "The application encountered a database connectivity issue and failed to establish a connection after 3 retry attempts, each timing out at 5000 milliseconds.\r\n\r\nThis error indicates that the database server may be unreachable or unresponsive, potentially impacting application functionality that depends on database access. As a result, transactions and data-driven operations may fail or experience delays.",
+      "include_log": false
+    }
+  },
+  {
+    "id": 3,
+    "alert_id": 2,
+    "type": "email",
+    "config": {
+      "to": [
+        "createcontent123@gmail.com"
+      ],
+      "subject": "Log Alert Triggered- Failed login attempt",
+      "body": "Log message:\r\nFailed login attempt\r\n              ",
+      "importance": "normal",
+      "include_log": true
+    }
+  },
+  {
+    "id": 4,
+    "alert_id": 2,
+    "type": "servicenow",
+    "config": {
+      "priority": "1",
+      "short_description": "jj",
+      "description": "j",
+      "include_log": false
+    }
+  }
+]

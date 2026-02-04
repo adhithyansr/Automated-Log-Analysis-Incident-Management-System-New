@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Upload Logs{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-6">
+
+    <div class="mb-4">
+      <h2 class="fw-bold mb-1">Upload Logs</h2>
+      <p class="text-secondary mb-0">Manually ingest log files for testing</p>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-body p-4">
+        <form method="POST" enctype="multipart/form-data">
+          <div class="mb-4">
+            <label class="form-label text-secondary fw-semibold">Select Log File</label>
+            <input type="file" name="logfile" class="form-control" required>
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Upload File</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="card bg-light border-0">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="fw-semibold text-secondary">Total logs in memory:</span>
+          <span class="badge bg-primary rounded-pill">{{ total_logs }}</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

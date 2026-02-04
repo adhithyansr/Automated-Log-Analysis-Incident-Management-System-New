@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% block title %}Create Alert{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+
+    <div class="mb-4">
+      <h2 class="fw-bold mb-1">Create Alert</h2>
+      <p class="text-secondary mb-0">Define alert rules and notification actions</p>
+    </div>
+
+    <form method="POST">
+
+      <!-- Alert Rule -->
+      <div class="card mb-4">
+        <div class="card-header bg-white py-3">
+          <h5 class="mb-0 fw-bold">Alert Rule</h5>
+        </div>
+        <div class="card-body p-4">
+
+          <div class="mb-3">
+            <label class="form-label text-secondary fw-semibold">Alert Name</label>
+            <input type="text" name="name" class="form-control" placeholder="e.g. Critical Database Error" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-secondary fw-semibold">Keyword</label>
+            <input type="text" name="keyword" class="form-control" placeholder="e.g. ERROR, Timeout, Failed" required>
+            <div class="form-text">Logs containing this keyword will trigger the alert</div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-secondary fw-semibold">Search Interval (minutes)</label>
+            <input type="number" name="interval_minutes" class="form-control" min="1" value="5" required>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="card mb-4">
+        <div class="card-header bg-white py-3">
+          <h5 class="mb-0 fw-bold">Actions</h5>
+        </div>
+        <div class="card-body p-4">
+
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="email_action" name="email_action">
+            <label class="form-check-label fw-semibold" for="email_action">
+              Email Alert
+            </label>
+          </div>
+
+          <div id="emailConfig" class="border rounded p-3 mb-4 d-none bg-light">
+            <div class="mb-3">
+              <label class="form-label text-secondary fw-semibold">Recipients</label>
+              <input type="text" name="email_to" class="form-control" placeholder="user@example.com, ops@example.com">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-secondary fw-semibold">Subject</label>
+              <input type="text" name="email_subject" class="form-control" value="Log Alert Triggered">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-secondary fw-semibold">Email Body</label>
+              <textarea name="email_body" class="form-control" rows="4">
+Log message:
+{{ log_message }}
+              </textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-secondary fw-semibold">Email Importance</label>
+              <select name="email_importance" class="form-select">
+                <option value="low">Low</option>
+                <option value="normal" selected>Normal</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-secondary fw-semibold">Throttle Interval (minutes)</label>
+              <input type="number" name="email_throttle" class="form-control" min="1" value="5" required>
+            </div>
+
+            <div class="form-check mt-2">
+              <input class="form-check-input" type="checkbox" name="email_include_log" id="email_include_log" checked>
+              <label class="form-check-label" for="email_include_log">
+                Include matched log details in email (timestamp, message)
+              </label>
+            </div>
+          </div>
+
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="sn_action" name="sn_action">
+            <label class="form-check-label fw-semibold" for="sn_action">
+              ServiceNow Incident
+            </label>
+          </div>
+
+          <div id="snConfig" class="border rounded p-3 d-none bg-light">
+            <div class="mb-3">
+              <label class="form-label text-secondary fw-semibold">Priority</label>
+              <select name="sn_priority" class="form-select">
+                <option value="1">P1</option>
+                <option value="2">P2</option>
+                <option value="3" selected>P3</option>
+                <option value="4">P4</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-secondary fw-semibold">Short Description</label>
+              <input type="text" name="sn_short_desc" class="form-control" placeholder="Application Error Detected">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-secondary fw-semibold">Description</label>
+              <textarea name="sn_description" class="form-control" rows="4">
+Log message:
+{{ log_message }}
+              </textarea>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label text-secondary fw-semibold">Throttle Interval (minutes)</label>
+              <input type="number" name="sn_throttle" class="form-control" min="1" value="5" required>
+            </div>
+
+            <div class="form-check mt-2">
+              <input class="form-check-input" type="checkbox" name="sn_include_log" id="sn_include_log" checked>
+              <label class="form-check-label" for="sn_include_log">
+                Include matched log details in incident (timestamp, message)
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="text-end mb-5">
+        <a href="{{ url_for('alerts.list_alerts') }}" class="btn btn-outline-secondary me-2">
+          Cancel
+        </a>
+        <button class="btn btn-primary px-4">Create Alert</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.getElementById("email_action").addEventListener("change", e => {
+    document.getElementById("emailConfig")
+      .classList.toggle("d-none", !e.target.checked);
+
+    // Auto-check ServiceNow if Email is selected (User can still uncheck it manually)
+    if (e.target.checked) {
+      const snInput = document.getElementById("sn_action");
+      if (!snInput.checked) {
+        snInput.checked = true;
+        document.getElementById("snConfig").classList.remove("d-none");
+      }
+    }
+  });
+
+  document.getElementById("sn_action").addEventListener("change", e => {
+    document.getElementById("snConfig")
+      .classList.toggle("d-none", !e.target.checked);
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,5 @@
+/venv
+/migrations
+/instance
+/logs
+.env

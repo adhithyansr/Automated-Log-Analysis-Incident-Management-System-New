@@ -1,0 +1,13 @@
+<div class="sidebar">
+    <h2>LogWatch</h2>
+
+    <a href="{{ url_for('auth.dashboard') }}">Dashboard</a>
+    <a href="{{ url_for('logs.list_log_sources') }}">Log Sources</a>
+    <a href="{{ url_for('logs.search_logs') }}">Search Logs</a>
+    <a href="{{ url_for('alerts.create_alert') }}">Create Alert</a>
+    <a href="{{ url_for('history.alert_history') }}">Alert History</a>
+
+    <hr>
+
+    <a href="{{ url_for('auth.logout') }}" class="logout">Logout</a>
+</div>

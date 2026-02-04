@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% block title %}Alerts{% endblock %}
+
+{% block content %}
+
+<!-- Alerts View -->
+<div id="alerts-view">
+    <div class="row mb-4 align-items-center">
+        <div class="col">
+            <h2 class="fw-bold mb-1">Alerts</h2>
+            <p class="text-secondary mb-0">Manage alert rules and schedules</p>
+        </div>
+        <div class="col-auto">
+            <button onclick="showHistory()" class="btn btn-outline-secondary me-2">
+                History
+            </button>
+            {% if current_user.role == "admin" %}
+            <a href="{{ url_for('alerts.create_alert') }}" class="btn btn-primary">
+                + Create Alert
+            </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Keyword</th>
+                    <th>Interval</th>
+                    <th>Status</th>
+                    <th>Owner</th>
+                    <th class="text-end">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for alert in alerts %}
+                <tr>
+                    <td>
+                        <span class="fw-semibold text-dark">{{ alert.name }}</span>
+                    </td>
+                    <td>
+                        <span class="badge bg-light text-dark border">
+                            {{ alert.keyword }}
+                        </span>
+                    </td>
+                    <td>{{ alert.interval_minutes }} min</td>
+                    <td>
+                        <span class="status-badge {{ 'success' if alert.enabled else 'secondary' }}">
+                            {{ 'Enabled' if alert.enabled else 'Disabled' }}
+                        </span>
+                    </td>
+                    <td class="text-muted">
+                        {% if alert.user %}
+                        {% if alert.user.username == 'adhithyan@admin' %}
+                        adhithyan @admin
+                        {% else %}
+                        {{ alert.user.username }}
+                        {% endif %}
+                        {% else %}
+                        adhithyan @admin
+                        {% endif %}
+                    </td>
+                    <td class="text-end">
+                        {% if current_user.role == "admin" or alert.user_id == current_user.id %}
+                        <a href="{{ url_for('alerts.toggle_alert', alert_id=alert.id) }}"
+                            class="btn btn-sm btn-outline-secondary me-1">
+                            {% if alert.enabled %}Disable{% else %}Enable{% endif %}
+                        </a>
+                        <a href="{{ url_for('alerts.edit_alert', alert_id=alert.id) }}"
+                            class="btn btn-sm btn-outline-primary">
+                            Edit
+                        </a>
+                        {% else %}
+                        <span class="text-muted small">Read Only</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if alerts|length == 0 %}
+        <div class="p-5 text-center text-muted">
+            <p class="mb-0">No alerts configured yet.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- History View -->
+<div id="history-view" style="display: none;">
+    <div class="row mb-4 align-items-center">
+        <div class="col">
+            <h2 class="fw-bold mb-1">Alert History</h2>
+            <p class="text-secondary mb-0">Audit log of all triggered alerts</p>
+        </div>
+        <div class="col-auto">
+            <button onclick="showAlerts()" class="btn btn-outline-primary">
+                &larr; Back
+            </button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Alert ID</th>
+                    <th>Action</th>
+                    <th>Status</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for h in history %}
+                <tr>
+                    <td class="text-muted">{{ h.triggered_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    <td><span class="fw-semibold text-dark">{{ h.alert_id }}</span></td>
+                    <td>
+                        <span class="badge bg-light text-dark border">
+                            {{ h.action_type }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="status-badge {{ 'success' if h.status=='SUCCESS' else 'error' }}">
+                            {{ h.status }}
+                        </span>
+                    </td>
+                    <td><span class="text-secondary">{{ h.message }}</span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if history|length == 0 %}
+        <div class="p-5 text-center text-muted">
+            <p class="mb-0">No history available.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    function showHistory() {
+        document.getElementById('alerts-view').style.display = 'none';
+        document.getElementById('history-view').style.display = 'block';
+    }
+
+    function showAlerts() {
+        document.getElementById('history-view').style.display = 'none';
+        document.getElementById('alerts-view').style.display = 'block';
+    }
+
+    // Check for hash in URL to handle direct link
+    window.onload = function () {
+        if (window.location.hash === '#history') {
+            showHistory();
+        }
+    }
+</script>
+
+{% endblock %}

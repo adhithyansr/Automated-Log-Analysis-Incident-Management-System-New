@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Edit User{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+
+        <div class="mb-4">
+            <h2 class="fw-bold mb-1">Edit User</h2>
+            <p class="text-secondary mb-0">Update user role or reset password</p>
+        </div>
+
+        <form method="POST">
+            <div class="card mb-4">
+                <div class="card-body p-4">
+
+                    <div class="mb-3">
+                        <label class="form-label text-secondary fw-semibold">Username</label>
+                        <input type="text" class="form-control"
+                            value="{% if user.username == 'adhithyan@admin' %}adhithyan @admin{% else %}{{ user.username }}{% endif %}"
+                            disabled>
+                        <div class="form-text">Username cannot be changed</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label text-secondary fw-semibold">Role</label>
+                        <select name="role" class="form-select">
+                            <option value="user" {% if user.role=='user' %}selected{% endif %}>User</option>
+                            <option value="admin" {% if user.role=='admin' %}selected{% endif %}>Admin</option>
+                        </select>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="mb-3">
+                        <label class="form-label text-secondary fw-semibold">Reset Password</label>
+                        <input type="password" name="password" class="form-control"
+                            placeholder="Leave blank to keep current password">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="text-end">
+                <a href="{{ url_for('auth.list_users') }}" class="btn btn-outline-secondary me-2">Cancel</a>
+                <button class="btn btn-primary px-4">Save Changes</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Search Logs{% endblock %}
+
+{% block content %}
+<div class="row mb-4 align-items-center">
+    <div class="col">
+        <h2 class="fw-bold mb-1">Search Logs</h2>
+        <p class="text-secondary mb-0">Query parsed log entries from all sources</p>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="POST">
+            {% if source_id %}
+            <input type="hidden" name="source_id" value="{{ source_id }}">
+            {% endif %}
+            <div class="row g-3">
+                <div class="col-md-12">
+                    <label class="form-label text-secondary fw-semibold">Keyword Search</label>
+                    <input type="text" name="keyword" class="form-control"
+                        placeholder="Search by keyword (eg:ERROR,WARN)..." value="{{ keyword }}">
+                </div>
+
+                <div class="col-md-5">
+                    <label class="form-label text-secondary fw-semibold">Start Time</label>
+                    <input type="datetime-local" name="start_time" class="form-control" value="{{ start_time }}"
+                        max="{{ now }}">
+                </div>
+
+                <div class="col-md-5">
+                    <label class="form-label text-secondary fw-semibold">End Time</label>
+                    <input type="datetime-local" name="end_time" class="form-control" value="{{ end_time }}"
+                        max="{{ now }}">
+                </div>
+
+                <div class="col-md-2 d-flex align-items-end">
+                    <button class="btn btn-primary w-100">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% if results %}
+<div class="table-container">
+    <div class="p-3 border-bottom bg-light">
+        <span class="fw-semibold">{{ results|length }}</span> result(s) found
+    </div>
+    <table class="table mb-0">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Message</th>
+                <th>Source</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in results %}
+            <tr>
+                <td class="text-muted" style="white-space: nowrap;">{{ log.timestamp }}</td>
+                <td>{{ log.message }}</td>
+                <td class="text-secondary">{{ log.source.file_path }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% elif request.method == "POST" %}
+<div class="alert alert-warning">No results found matching your query.</div>
+{% endif %}
+{% endblock %}

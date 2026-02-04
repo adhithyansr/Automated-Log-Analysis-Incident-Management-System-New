@@ -1,0 +1,162 @@
+[
+  {
+    "id": 866,
+    "alert_id": 2,
+    "action": "servicenow",
+    "status": "SUCCESS",
+    "message": "Skipped creation: Duplicate incident INC0010013 exists",
+    "triggered_at": "2026-02-03 19:39:41.500958"
+  },
+  {
+    "id": 865,
+    "alert_id": 2,
+    "action": "email",
+    "status": "SUCCESS",
+    "message": "Email sent successfully",
+    "triggered_at": "2026-02-03 19:39:41.500952"
+  },
+  {
+    "id": 864,
+    "alert_id": 2,
+    "action": "servicenow",
+    "status": "SUCCESS",
+    "message": "Skipped creation: Duplicate incident INC0010013 exists",
+    "triggered_at": "2026-02-03 19:39:36.018964"
+  },
+  {
+    "id": 863,
+    "alert_id": 2,
+    "action": "email",
+    "status": "SUCCESS",
+    "message": "Email sent successfully",
+    "triggered_at": "2026-02-03 19:39:36.018957"
+  },
+  {
+    "id": 862,
+    "alert_id": 2,
+    "action": "servicenow",
+    "status": "SUCCESS",
+    "message": "Skipped creation: Duplicate incident INC0010013 exists",
+    "triggered_at": "2026-02-03 19:39:33.107523"
+  },
+  {
+    "id": 861,
+    "alert_id": 2,
+    "action": "email",
+    "status": "SUCCESS",
+    "message": "Email sent successfully",
+    "triggered_at": "2026-02-03 19:39:33.107517"
+  },
+  {
+    "id": 860,
+    "alert_id": 2,
+    "action": "servicenow",
+    "status": "SUCCESS",
+    "message": "Skipped creation: Duplicate incident INC0010013 exists",
+    "triggered_at": "2026-02-03 19:39:31.006340"
+  },
+  {
+    "id": 859,
+    "alert_id": 2,
+    "action": "email",
+    "status": "SUCCESS",
+    "message": "Email sent successfully",
+    "triggered_at": "2026-02-03 19:39:31.006333"
+  },
+  {
+    "id": 858,
+    "alert_id": 2,
+    "action": "servicenow",
+    "status": "SUCCESS",
+    "message": "Skipped creation: Duplicate incident INC0010013 exists",
+    "triggered_at": "2026-02-03 19:39:27.760049"
+  },
+  {
+    "id": 857,
+    "alert_id": 2,
+    "action": "email",
+    "status": "SUCCESS",
+    "message": "Email sent successfully",
+    "triggered_at": "2026-02-03 19:39:27.760045"
+  },
+  {
+    "id": 856,
+    "alert_id": 2,
+    "action": "servicenow",
+    "status": "SUCCESS",
+    "message": "Skipped creation: Duplicate incident INC0010013 exists",
+    "triggered_at": "2026-02-03 19:39:25.391422"
+  },
+  {
+    "id": 855,
+    "alert_id": 2,
+    "action": "email",
+    "status": "SUCCESS",
+    "message": "Email sent successfully",
+    "triggered_at": "2026-02-03 19:39:25.391417"
+  },
+  {
+    "id": 854,
+    "alert_id": 2,
+    "action": "servicenow",
+    "status": "SUCCESS",
+    "message": "Skipped creation: Duplicate incident INC0010013 exists",
+    "triggered_at": "2026-02-03 19:39:22.771051"
+  },
+  {
+    "id": 853,
+    "alert_id": 2,
+    "action": "email",
+    "status": "SUCCESS",
+    "message": "Email sent successfully",
+    "triggered_at": "2026-02-03 19:39:22.771046"
+  },
+  {
+    "id": 852,
+    "alert_id": 2,
+    "action": "servicenow",
+    "status": "SUCCESS",
+    "message": "Skipped creation: Duplicate incident INC0010013 exists",
+    "triggered_at": "2026-02-03 19:39:17.074441"
+  },
+  {
+    "id": 851,
+    "alert_id": 2,
+    "action": "email",
+    "status": "SUCCESS",
+    "message": "Email sent successfully",
+    "triggered_at": "2026-02-03 19:39:17.074434"
+  },
+  {
+    "id": 850,
+    "alert_id": 2,
+    "action": "servicenow",
+    "status": "SUCCESS",
+    "message": "Skipped creation: Duplicate incident INC0010013 exists",
+    "triggered_at": "2026-02-03 19:36:42.147286"
+  },
+  {
+    "id": 849,
+    "alert_id": 2,
+    "action": "email",
+    "status": "SUCCESS",
+    "message": "Email sent successfully",
+    "triggered_at": "2026-02-03 19:36:42.147281"
+  },
+  {
+    "id": 848,
+    "alert_id": 2,
+    "action": "servicenow",
+    "status": "SUCCESS",
+    "message": "Skipped creation: Duplicate incident INC0010013 exists",
+    "triggered_at": "2026-02-03 19:36:36.205139"
+  },
+  {
+    "id": 847,
+    "alert_id": 2,
+    "action": "email",
+    "status": "SUCCESS",
+    "message": "Email sent successfully",
+    "triggered_at": "2026-02-03 19:36:36.205135"
+  }
+]

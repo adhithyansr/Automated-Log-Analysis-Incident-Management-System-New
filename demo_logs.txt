@@ -1,10 +1,8 @@
 ERROR DatabaseConnection - Failed to connect to database after 3 retries (timeout=5000ms)
 WARN AuthService - Failed login attempt for username=admin from IP=192.168.1.45
-
 FATAL SQLIntegrityConstraintViolationException: Duplicate entry 'user_123
+
 
 
 ERROR DatabaseConnection - Failed to connect to database after 3 retries (timeout=5000ms)
 WARN AuthService - Failed login attempt for username=admin from IP=192.168.1.45
-
-

@@ -141,7 +141,7 @@ def create_alert():
                 "subject": request.form["email_subject"],
                 "body": request.form["email_body"],
                 "importance": request.form["email_importance"],
-                "throttle_minutes": int(request.form["email_throttle"] or 0),
+                "throttle_minutes": 1 ,#int(request.form["email_throttle"] or 0),
                 "include_log": "email_include_log" in request.form,
             }
 
@@ -157,7 +157,7 @@ def create_alert():
                 "priority": request.form["sn_priority"],
                 "short_description": request.form["sn_short_desc"],
                 "description": request.form["sn_description"],
-                "throttle_minutes": int(request.form["sn_throttle"] or 0),
+                "throttle_minutes": 1, #int(request.form["sn_throttle"] or 0),
                 "include_log": "sn_include_log" in request.form,
             }
 
